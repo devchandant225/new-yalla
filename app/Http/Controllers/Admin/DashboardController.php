@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Property;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $stats = [
-            'total_properties' => Property::count(),
-            'total_categories' => Category::count(),
-            'featured_properties' => Property::where('is_featured', true)->count(),
-            'recent_properties' => Property::latest()->take(5)->get(),
+            'total_products' => Product::count(),
+            'total_orders' => Order::count(),
+            'total_users' => User::count(),
+            'pending_orders' => Order::where('status', 'pending')->count(),
+            'recent_orders' => Order::with('user')->latest()->take(5)->get(),
         ];
 
         return view('admin.dashboard', compact('stats'));

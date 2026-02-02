@@ -4,24 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Jetski extends Model
+class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'category_id',
         'name',
         'slug',
         'description',
-        'price_per_hour',
+        'price',
         'image',
-        'whatsapp_phone',
-        'features',
+        'stock',
         'is_active',
     ];
 
     protected $casts = [
-        'features' => 'array',
         'is_active' => 'boolean',
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

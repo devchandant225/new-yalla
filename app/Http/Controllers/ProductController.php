@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function index(Request $request)
+    {
+        $query = Product::where('is_active', true);
+
+        if ($request->has('category')) {
+            $category = Category::where('slug', $request->category)->first();
+            if ($category) {
+                $query->where('category_id', $category->id);
+            }
+        }
+
+        $products = $query->latest()->paginate(12);
+        $categories = Category::has('products')->get();
+
+        return view('shop', compact('products', 'categories'));
+    }
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->where('is_active', true)
+            ->take(4)
+            ->get();
+
+        return view('product', compact('product', 'relatedProducts'));
+    }
+}
