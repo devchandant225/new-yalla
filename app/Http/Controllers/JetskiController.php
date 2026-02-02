@@ -11,7 +11,7 @@ class JetskiController extends Controller
     // Public Methods
     public function index()
     {
-        $jetskis = Jetski::where('is_active', true)->get();
+        $jetskis = Jetski::where('is_active', true)->take(6)->get();
         return view('welcome', compact('jetskis'));
     }
 

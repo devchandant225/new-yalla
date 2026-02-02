@@ -40,6 +40,8 @@
         </div>
     </section>
 
+    <x-more-info-section />
+
     <!-- Values Section -->
     <section class="py-20 bg-royal-blue text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

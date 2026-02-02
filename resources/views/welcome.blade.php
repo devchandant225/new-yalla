@@ -57,7 +57,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @forelse($jetskis->take(3) as $jetski)
+            @forelse($jetskis as $jetski)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
                     <div class="relative h-64 overflow-hidden">
                         <img src="{{ $jetski->image ? asset('storage/'.$jetski->image) : 'https://images.unsplash.com/photo-1610448721566-47369c768e70?q=80&w=2070&auto=format&fit=crop' }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="{{ $jetski->name }}">
@@ -82,7 +82,7 @@
                 </div>
             @empty
                 <!-- Placeholder if no data -->
-                @for($i=1; $i<=3; $i++)
+                @for($i=1; $i<=6; $i++)
                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
                     <div class="relative h-64 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1610448721566-47369c768e70?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Jetski">
@@ -110,6 +110,8 @@
         </div>
     </div>
 </section>
+
+<x-more-info-section />
 
 <!-- Call to Action -->
 <section class="py-20 bg-royal-blue text-white">
