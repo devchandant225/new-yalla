@@ -15,6 +15,7 @@ Route::get('/fleet', [JetskiController::class, 'fleet'])->name('fleet');
 Route::get('/fleet/{slug}', [JetskiController::class, 'show'])->name('fleet.detail');
 Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Admin routes (requires authentication and admin privileges)
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
